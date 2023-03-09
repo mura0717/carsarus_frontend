@@ -1,7 +1,7 @@
 //import "https://unpkg.com/navigo"  //Will create the global Navigo object used below
 import "./navigo_EditedByLars.js"  //Will create the global Navigo, with a few changes, object used below
 //import "./navigo.min.js"  //Will create the global Navigo object used below
-
+// test
 import {
   setActiveLink, adjustForMissingHash, renderTemplate, loadHtml
 } from "./utils.js"
