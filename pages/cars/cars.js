@@ -6,20 +6,11 @@ export async function initCars() {
     const carsContainer = document.querySelector("#cars-container");
     carsContainer.innerHTML = "";
     cars.forEach(car => {
-        carsContainer.innerHTML += `
-            <div class="car">
-                p>${car.id}</p>
-                <p>${car.model}</p>
-                <p>${car.brand}</p>
-                <p>${car.model}</p>
-                <p>${car.pricePrDay}</p>
-            </div>
-        `
+        carsContainer.innerHTML += "<div class='car'><p>${car.id}</p><p>${car.model}</p><p>${car.brand}</p><p>${car.model}</p><p>${car.pricePrDay}</p></div>"
     });
 }
 
 function getCars() {
     return fetch(URL)
         .then(res => res.json())
-        .catch(r => console.log(r)
 }
