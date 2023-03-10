@@ -11,10 +11,10 @@ export async function initCars() {
     });
 }
 
-function addChildToElement(parent, value) {
+function addChildToElement(el, value) {
     let p = document.createElement("p");
     p.textContent = value;
-    parent.addChild(p);
+    el.addChild(p);
 }
 
 async function getCars() {
