@@ -14,7 +14,7 @@ export async function initCars() {
 function addChildToElement(el, value) {
     let p = document.createElement("p");
     p.textContent = value;
-    el.addChild(p);
+    el.appendChild(p);
 }
 
 async function getCars() {
