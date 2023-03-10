@@ -15,10 +15,6 @@ export async function initCars() {
     });
 }
 
-function formatContainer(el) {
-    el.style.display = 
-}
-
 function addChildToElement(el, value) {
     let p = document.createElement("p");
     p.textContent = value;
