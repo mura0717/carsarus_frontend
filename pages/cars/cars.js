@@ -6,7 +6,7 @@ export async function initCars() {
     const cars = await getCars();
     console.log(cars)
     const carsContainer = document.querySelector("#cars-container");
-    cars.forEach()(car => {
+    cars.forEach(car => {
         addChild(carsContainer, car.brand);
     });
 }
