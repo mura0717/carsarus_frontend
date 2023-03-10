@@ -5,20 +5,22 @@ const URL = API_URL + "/cars"
 export async function initCars() {
     const cars = await getCars();
     console.log(cars)
-    let carsContainer = document.querySelector("#cars-container");
+    let carsContainer = document.querySelector("#table-rows");
     cars.forEach(car => {
-        addChildToElement(carsContainer, car.id);
-        addChildToElement(carsContainer, car.brand);
-        addChildToElement(carsContainer, car.model);
-        addChildToElement(carsContainer, car.pricePrDay);
-        addChildToElement(carsContainer, car.bestDiscount);
+        let row = document.createElement("tr");
+        addChildToElement(row, car.id);
+        addChildToElement(row, car.brand);
+        addChildToElement(row, car.model);
+        addChildToElement(row, car.pricePrDay);
+        addChildToElement(row, car.bestDiscount);
+        carsContainer.appendChild(row);
     });
 }
 
 function addChildToElement(el, value) {
-    let p = document.createElement("p");
-    p.textContent = value;
-    el.appendChild(p);
+    let rowElement = document.createElement("td");
+    rowElement.textContent = value
+    el.appendChild(rowElement);
 }
 
 async function getCars() {
