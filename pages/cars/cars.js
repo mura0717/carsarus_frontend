@@ -4,12 +4,17 @@ const URL = API_URL + "/cars"
 
 export async function initCars() {
     const cars = await getCars();
-    console.log(cars);
+    console.log(cars)
     const carsContainer = document.querySelector("#cars-container");
-    carsContainer.innerHTML = "";
-    cars.forEach(car => {
-        carsContainer.innerHTML += "<div class='car'>p>${car.id}</p><p>${car.model}</p><p>${car.brand}</p><p>${car.model}</p><p>${car.pricePrDay}</p></div>"
+    cars.forEach()(car => {
+        addChild(carsContainer, car.brand);
     });
+}
+
+function addChild(parent, value) {
+    let p = document.createElement("p");
+    p.textContent = value;
+    parent.addChild(p);
 }
 
 async function getCars() {
