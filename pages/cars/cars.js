@@ -20,7 +20,7 @@ function formatContainer(el) {
 }
 
 function addChildToElement(el, value) {
-    let p = document.createElement("th");
+    let p = document.createElement("tr");
     p.textContent = value;
     el.appendChild(p);
 }
