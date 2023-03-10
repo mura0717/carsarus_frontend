@@ -5,7 +5,7 @@ const URL = API_URL + "/cars"
 export async function initCars() {
     const cars = await getCars();
     console.log(cars)
-    let carsContainer = document.querySelector("#table-rows");
+    let carsContainer = document.querySelector("#cars-container");
     cars.forEach(car => {
         addChildToElement(carsContainer, car.id);
         addChildToElement(carsContainer, car.brand);
@@ -20,7 +20,7 @@ function formatContainer(el) {
 }
 
 function addChildToElement(el, value) {
-    let p = document.createElement("tr");
+    let p = document.createElement("p");
     p.textContent = value;
     el.appendChild(p);
 }
