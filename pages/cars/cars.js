@@ -4,7 +4,7 @@ const URL = API_URL + "/cars/admin"
 
 export async function initCars() {
     const cars = await getCars();
-    const carsContainer = document.querySelector("#table-rows");
+    const tableRowContent = document.querySelector("#table-rows");
     cars.forEach(car => {
         let row = document.createElement("tr");
         addChildToElement(row, car.id);
@@ -12,7 +12,7 @@ export async function initCars() {
         addChildToElement(row, car.model);
         addChildToElement(row, car.pricePrDay);
         addChildToElement(row, car.bestDiscount);
-        carsContainer.appendChild(row);
+        tableRowContent.appendChild(row);
     });
 }
 
