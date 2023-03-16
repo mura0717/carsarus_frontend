@@ -1,28 +1,41 @@
 
-export function renderTemplate(template, contentId) {
+/**
+ * Appends the provided template to the node with the id contentId
+ * @param {*} templ The HTML-Template to render
+ * @param {string} contentId
+ */
+export function renderTemplate(templ, contentId) {
+  const clone = templ.content.cloneNode(true)
   const content = document.getElementById(contentId)
-  if (!content) {
-    throw Error("No Element found for provided content id")
-  }
   content.innerHTML = ""
-  content.append(template)
+  content.appendChild(clone)
 }
 
-export async function loadHtml(page) {
+
+
+
+/**
+ * Loads an external file with an html-template, adds it to the body of your page, and returns the template
+ * The file to be loaded can contain more than one template, but the one that will be returned must
+ * be the first one in the file and this does not require an id
+ * @param {string} page - Path to the file containing the template ('/templates/template.html')
+ * @return {Promise<*>} On succesfull resolvement, the HtmlTemplate found in the file
+ */
+export async function loadTemplate(page) {
   const resHtml = await fetch(page).then(r => {
     if (!r.ok) {
       throw new Error(`Failed to load the page: '${page}' `)
     }
     return r.text()
   });
-  const parser = new DOMParser()
-  const content = parser.parseFromString(resHtml, "text/html")
-  const div = content.querySelector(".template")
-  if (!div) {
-    throw new Error(`No outer div with class 'template' found in file '${page}'`)
-  }
-  return div
+  //const body = document.getElementsByTagName("BODY")[0];
+  const div = document.createElement("div");
+  div.innerHTML = resHtml;
+  //body.appendChild(div)
+  //return div.querySelector("template")
+  return div.querySelector("template")
 };
+
 
 /**
  * Only meant for when Navigo is set to use Hash based routing (Always this semester)
@@ -54,6 +67,26 @@ export function setActiveLink(topnav, activeUrl) {
     }
   })
 }
+
+export function makeOptions(method, body, addToken) {
+  const opts = {
+    method: method,
+    headers: {
+      "Content-type": "application/json",
+      "Accept": "application/json"
+    }
+  }
+  if (body) {
+    opts.body = JSON.stringify(body);
+  }
+  if (addToken && localStorage.getItem("token")) {
+    opts.headers.Authorization = "Bearer " + localStorage.getItem("token")
+  }
+
+
+  return opts;
+}
+
 
 /**
  * Small utility function to use in the first "then()" when fetching data from a REST API that supplies error-responses

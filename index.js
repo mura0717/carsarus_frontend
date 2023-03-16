@@ -3,29 +3,29 @@ import "./navigo_EditedByLars.js"  //Will create the global Navigo, with a few c
 //import "./navigo.min.js"  //Will create the global Navigo object used below
 // test
 import {
-  setActiveLink, adjustForMissingHash, renderTemplate, loadHtml
+  setActiveLink, adjustForMissingHash, renderTemplate, loadTemplate
 } from "./utils.js"
 
 import { initReservation } from "./pages/reservation/reserve.js"
 import { initMembers } from "./pages/members/members.js"
 import { initCars } from "./pages/cars/cars.js"
 import { initAddCar } from "./pages/addCar/addCar.js"
-import { initLogin } from "./pages/login/login.js"
+import { initLogin, logout } from "./pages/login/login.js"
 import { initSignup } from "./pages/signup/signup.js"
 import { initFindEditCar } from "./pages/findEditCar/findEditCar.js"
 import { initListReservationsAll } from "./pages/showReservations/reservations.js"
 
 window.addEventListener("load", async () => {
 
-  const templateCars = await loadHtml("./pages/cars/cars.html")
-  const templateMembers = await loadHtml("./pages/members/members.html")
-  const templateAddCar = await loadHtml("./pages/addCar/addCar.html")
-  const templateSignup = await loadHtml("./pages/signup/signup.html")
-  const templateLogin = await loadHtml("./pages/login/login.html")
-  const templateFindEditCar = await loadHtml("./pages/findEditCar/findEditCar.html")
-  const templateReserve = await loadHtml("./pages/reservation/reserve.html")
-  const templateReservations = await loadHtml("./pages/showReservations/reservations.html")
-  const templateNotFound = await loadHtml("./pages/notFound/notFound.html")
+  const templateCars = await loadTemplate("./pages/cars/cars.html")
+  const templateMembers = await loadTemplate("./pages/members/members.html")
+  const templateAddCar = await loadTemplate("./pages/addCar/addCar.html")
+  const templateSignup = await loadTemplate("./pages/signup/signup.html")
+  const templateLogin = await loadTemplate("./pages/login/login.html")
+  const templateFindEditCar = await loadTemplate("./pages/findEditCar/findEditCar.html")
+  const templateReserve = await loadTemplate("./pages/reservation/reserve.html")
+  const templateReservations = await loadTemplate("./pages/showReservations/reservations.html")
+  const templateNotFound = await loadTemplate("./pages/notFound/notFound.html")
 
   adjustForMissingHash()
 
@@ -80,6 +80,9 @@ window.addEventListener("load", async () => {
       "/login": (match) => {
         renderTemplate(templateLogin, "content")
         initLogin()
+      },
+      "/logout": () => {
+        logout()
       }
     })
     .notFound(() => {
