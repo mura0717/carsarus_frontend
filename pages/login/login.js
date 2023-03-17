@@ -13,6 +13,11 @@ function showLoginEntry() {
     document.getElementById("logout-id").style.display = "none"
 }
 
+function showLogOutEntry() {
+    document.getElementById("login-id").style.display = "none"
+    document.getElementById("logout-id").style.display = "block"
+}
+
 function showMenuEntries() {
     document.getElementById("cars-admin").style.display = "block"
     document.getElementById("members-admin").style.display = "block"
@@ -66,9 +71,7 @@ async function login(evt) {
             showMenuEntries()
             hideSignUp()
         }
-
-        document.getElementById("login-id").style.display = "none"
-        document.getElementById("logout-id").style.display = "block"
+        showLogOutEntry()
 
         window.router.navigate("")
     } catch (error) {

@@ -16,12 +16,12 @@ async function makeCar() {
     const bestDiscount = document.getElementById("best-discount").value;
 
     const body = { brand, model, pricePrDay, bestDiscount };
+    const token = localStorage.token
     const options = {
         "method": "POST",
         "headers": {
             "Content-Type": "application/json",
-            //"Authorization": "Bearer " + localStorage.getItem("jwtToken")
-            //"Authorization": "Bearer " + localStorage.token
+            "Authorization": "Bearer " + token
         },
         "body": JSON.stringify(body)
     }
