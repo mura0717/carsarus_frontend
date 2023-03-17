@@ -16,6 +16,7 @@ function showLoginEntry() {
 function showLogOutEntry() {
     document.getElementById("login-id").style.display = "none"
     document.getElementById("logout-id").style.display = "block"
+
 }
 
 function showMenuEntries() {
@@ -69,11 +70,11 @@ async function login(evt) {
 
         if (response.roles.includes("ADMIN")) {
             showMenuEntries()
-            hideSignUp()
         }
+        hideSignUp()
         showLogOutEntry()
-
         window.router.navigate("")
+
     } catch (error) {
         document.getElementById("error").innerHTML = error.message
 
