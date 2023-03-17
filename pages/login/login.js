@@ -25,7 +25,16 @@ function hideMenuEntries() {
     document.getElementById("reservations-admin").style.display = "none"
 }
 
+function hideSignUp() {
+    document.getElementById("signup-id").style.display = "none"
+}
+
+function showSignUp() {
+    document.getElementById("signup-id").style.display = "block"
+}
+
 export async function logout() {
+    showSignUp()
     showLoginEntry()
     hideMenuEntries()
     localStorage.clear()
@@ -55,6 +64,7 @@ async function login(evt) {
 
         if (response.roles.includes("ADMIN")) {
             showMenuEntries()
+            hideSignUp()
         }
 
         document.getElementById("login-id").style.display = "none"
