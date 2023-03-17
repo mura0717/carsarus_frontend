@@ -1,28 +1,33 @@
 import { API_URL } from "../../settings.js"
+import { handleHttpErrors, makeOptions, sanitizeStringWithTableRows } from "../../utils.js";
+
 const URL = API_URL + "/members"
 
 export async function initMembers() {
-    const members = await getMembers();
-    const tableRowContent = document.querySelector("#table-rows");
-    members.forEach(member => {
-        let row = document.createElement("tr");
-        addChildToElement(row, member.username);
-        addChildToElement(row, member.email);
-        addChildToElement(row, member.firstName);
-        addChildToElement(row, member.lastName);
-        addChildToElement(row, member.address);
-        addChildToElement(row, member.city);
-        tableRowContent.appendChild(row);
-    });
+    const members = await getAllMembers();
 }
 
-function addChildToElement(element, value) {
-    let rowElement = document.createElement("td");
-    rowElement.textContent = value
-    element.appendChild(rowElement);
-}
+export async function getAllMembers() {
+    try {
+        document.getElementById("error").innerText = "";
 
-async function getMembers() {
-    return await fetch(URL)
-        .then(res => res.json())
+        const options = {
+            method: "GET",
+            headers: { "Authorization": "Bearer " + localStorage.token }
+        }
+
+        const members = await fetch(URL).then(res => handleHttpErrors(res))
+
+        const tableRows = members.map(member => `
+    <tr>
+    <td>${member.username}</td>
+    <td>${member.email}</td>
+    <td>${member.firstName + " " + member.lastName}</td>
+    <td>${member.ranking}</td>
+    </tr>
+    `).join("")
+        document.getElementById("tbl-body").innerHTML = sanitizeStringWithTableRows(tableRows);
+    } catch (error) {
+        document.getElementById("error").innerText = error.message;
+    }
 }

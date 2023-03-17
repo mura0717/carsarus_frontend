@@ -1,6 +1,5 @@
 import { API_URL } from "../../settings.js"
-import { handleHttpErrors, makeOptions } from "../../utils.js";
-import { sanitizeStringWithTableRows } from "../../utils.js";
+import { handleHttpErrors, makeOptions, sanitizeStringWithTableRows } from "../../utils.js";
 
 const URL = API_URL + "/cars/admin"
 
@@ -17,7 +16,7 @@ export async function getAllCars() {
             headers: { "Authorization": "Bearer " + localStorage.token }
         }
 
-        //ALT const options = makeOptions("POST", body, true)
+        //ALT: const options = makeOptions("GET", body, true)
 
         const cars = await fetch(URL).then(res => handleHttpErrors(res))
 
@@ -41,7 +40,10 @@ export async function getAllCars() {
 
 
 
-/*export async function initCars2() {
+/*
+MARTIN SOLUTION:
+
+export async function initCars2() {
     const cars = await getCars();
     const tableRowContent = document.querySelector("#table-rows");
     cars.forEach(car => {
