@@ -10,15 +10,15 @@ export async function initCars() {
 export async function getAllCars() {
     try {
         document.getElementById("error").innerText = "";
-
+        const token = localStorage.token
         const options = {
             method: "GET",
-            headers: { "Authorization": "Bearer " + localStorage.token }
+            headers: { "authorization": "Bearer " + token }
         }
 
         //ALT: const options = makeOptions("GET", body, true)
 
-        const cars = await fetch(URL).then(res => handleHttpErrors(res))
+        const cars = await fetch(URL, options).then(res => handleHttpErrors(res))
 
         const tableRows = cars.map(car => `
         <tr>

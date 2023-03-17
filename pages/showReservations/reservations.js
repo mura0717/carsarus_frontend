@@ -19,7 +19,7 @@ export async function getAllReservations() {
             headers: { "Authorization": "Bearer " + localStorage.token }
         }
 
-        const reservations = await fetch(URL).then(res => handleHttpErrors(res))
+        const reservations = await fetch(URL, options).then(res => handleHttpErrors(res))
 
         const tableRows = reservations.map(reservation => `
     <tr>

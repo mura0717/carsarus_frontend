@@ -8,10 +8,28 @@ export function initLogin() {
 
 }
 
-export async function logout() {
+function showLoginEntry() {
     document.getElementById("login-id").style.display = "block"
     document.getElementById("logout-id").style.display = "none"
+}
+
+function showMenuEntries() {
+    document.getElementById("cars-admin").style.display = "block"
+    document.getElementById("members-admin").style.display = "block"
+    document.getElementById("reservations-admin").style.display = "block"
+}
+
+function hideMenuEntries() {
+    document.getElementById("cars-admin").style.display = "none"
+    document.getElementById("members-admin").style.display = "none"
+    document.getElementById("reservations-admin").style.display = "none"
+}
+
+export async function logout() {
+    showLoginEntry()
+    hideMenuEntries()
     localStorage.clear()
+    window.router.navigate("/login")
 }
 
 async function login(evt) {
@@ -21,22 +39,22 @@ async function login(evt) {
     const username = document.getElementById("username").value
     const password = document.getElementById("password").value
 
-    //const userDTO = {username: username, password: password}
+    //ALT: const userDTO = {username: username, password: password}
     const userDTO = { username, password }
 
     const options = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userDTO })
+        body: JSON.stringify(userDTO)
     }
     try {
-        const response = await fetch(URL, options).then(res => handleHttpErrors())
+        const response = await fetch(URL, options).then(res => handleHttpErrors(res))
         localStorage.setItem("user", response.username)
         localStorage.setItem("token", response.token)
         localStorage.setItem("roles", response.roles)
 
-        if (response.roles.includes("admin")) {
-            document.getElementById("admin-id").style.display = "block"
+        if (response.roles.includes("ADMIN")) {
+            showMenuEntries()
         }
 
         document.getElementById("login-id").style.display = "none"

@@ -16,7 +16,7 @@ export async function getAllMembers() {
             headers: { "Authorization": "Bearer " + localStorage.token }
         }
 
-        const members = await fetch(URL).then(res => handleHttpErrors(res))
+        const members = await fetch(URL, options).then(res => handleHttpErrors(res))
 
         const tableRows = members.map(member => `
     <tr>
